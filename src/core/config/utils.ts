@@ -1,8 +1,14 @@
 import { clsx, type ClassValue } from 'clsx';
+import { format } from 'date-fns';
 import { twMerge } from 'tailwind-merge';
 
 export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
+};
+
+export const formatDate = (date: string): string | undefined => {
+  if (!date) return undefined;
+  return format(new Date(date), 'dd MMM yyyy - hh:mm:ss a');
 };
 
 const isValidString = (str: string): boolean => {

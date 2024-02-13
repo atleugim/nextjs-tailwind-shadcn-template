@@ -1,3 +1,5 @@
+import ExampleButton from '~/core/components/common/example-button';
+
 const HomePage = () => {
   return (
     <main className='grid h-dvh w-full place-content-center'>
@@ -7,6 +9,7 @@ const HomePage = () => {
           Esta es una plantilla para Next.js con TypeScript, Tailwind CSS,
           Prettier, Husky y ESLint configurados.
         </p>
+        <ExampleButton />
       </div>
     </main>
   );
