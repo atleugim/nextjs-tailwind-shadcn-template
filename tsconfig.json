@@ -23,7 +23,7 @@
       "~/core/*": ["./src/core/*"],
       "~/components/*": ["./src/core/components/*"],
       "~/hooks/*": ["./src/core/hooks/*"],
-      "~/lib/*": ["./src/core/lib/*"],
+      "~/config/*": ["./src/core/config/*"],
       "~/providers/*": ["./src/core/providers/*"],
       "~/repositories/*": ["./src/core/repositories/*"]
     }
