@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js Template
+
+This is a [Next.js](https://nextjs.org/) project with some base configurations and code formatting.
 
 ## Getting Started
 
-First, run the development server:
+Install the dependencies:
+
+```bash
+npm install
+# or
+pnpm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
 # or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Shadcn-UI](https://ui.shadcn.com/)
+- [Prettier](https://prettier.io/)
+- [ESLint](https://eslint.org/)
+- [Husky](https://typicode.github.io/husky/)
+- [Lint-Staged](https://github.com/lint-staged/lint-staged?tab=readme-ov-file#readme)
 
-## Learn More
+## Deployment
 
-To learn more about Next.js, take a look at the following resources:
+This project can be deployed on [Vercel](https://vercel.com/).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Folder Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+├── src
+│   ├── app
+│   ├── core
+│   │   ├── components
+│   │   |   ├── common
+│   │   |   ├── ui
+│   │   ├── hooks
+│   │   ├── config
+│   │   ├── providers
+│   │   ├── repositories
+│   │   ├── styles
+```
 
-## Deploy on Vercel
+## Components
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### The `ui` folder
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This folder is very important, it contains all the components from the [shadcn-ui](https://ui.shadcn.com/) library, but with some modifications to adapt them to the project, modify them could affect the entire project., so be careful.
+
+### How to create new components
+
+If the component is a common component (see: `src/core/components/common`).
+
+If the component belongs to any of the already created folders components (see: `src/core/components/folder-name`).
+
+- Create a new folder (name is based on the already use convention), and inside create the component.
+- Note that the main component must be named `index.tsx`
+
+If the component does not belong to any of the already created folders components.
+
+- Create a new folder in `src/core/components/dashboard` with the required feature name (example: `src/core/components/dashboard/new-feature`).
+- Then follow the steps in the first condition.
+
+## Repositories
+
+### How to create new API queries
+
+If the required query belongs to any of the already created repositories (see: `src/core/repositories`).
+
+- Create a new method in the repository with the required query.
+- Note that you must type the request parameters and the response data (see: `src/core/config/interfaces.ts`) for types or create a new one there (please don't be redundant).
+
+If the required query does not belong to any of the already created repositories.
+
+- Create a new repository in `src/core/repositories` with the required query (example: `src/core/repositories/new-repository.ts`).
+- Then follow the steps in the first condition.
+
+### How to consume the Repositories methods
+
+- Inside the component where you want to consume the repository method create a new function with a try-catch block and use the `call` function from `src/core/config/call.ts`.
+- You can handle loading and error states with the `useState` hook.
+- ⚠️ If you have too many requests and need some caching you can use the `useQuery` hook from [TanStack Query](https://tanstack.com/query/latest/).
+
+## Errors
+
+### How to handle API errors
+
+By default the repositories do not control the errors thrown, you must contain them where you use the methods with a try-catch block.
+
+- If your api responds in english you can do the following:
+  - Create an errors.ts file inside the `~/core/config` folder.
+  - Inside the file we will use a Record:
+  ```ts
+  export const errorsMap: Record<string, string> = {
+    'Error, email is used by other user': 'El correo electrónico ya está en uso',
+  };
+  ```
+  - The record key is the api error in English and the value is the error in Spanish to show to the user.
+- Then use the `toast.error()` of [sonner](https://sonner.emilkowal.ski/) to display the error message.
