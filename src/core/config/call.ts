@@ -76,5 +76,9 @@ export const call = async ({
 
     console.info(`REQUEST: ${logPath} | STATUS: completed`);
     return res;
-  } catch (err) {}
+  } catch (err) {
+    console.error(`REQUEST: PATH: ${logPath} | STATUS: error`);
+    console.error(err);
+    throw err;
+  }
 };
