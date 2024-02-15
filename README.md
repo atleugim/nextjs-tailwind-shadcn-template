@@ -61,16 +61,16 @@ This folder is very important, it contains all the components from the [shadcn-u
 
 ### How to create new components
 
-If the component is a common component (see: `src/core/components/common`).
+If the component is common through the app  (see: `src/core/components/common`).
 
-If the component belongs to any of the already created folders components (see: `src/core/components/folder-name`).
+If the component belongs to any of the already created folders components (see: `src/core/components/${folder-name}`).
 
-- Create a new folder (name is based on the already use convention), and inside create the component.
+- Create a new folder (name must be `kebab-case`), and inside create the component.
 - Note that the main component must be named `index.tsx`
 
 If the component does not belong to any of the already created folders components.
 
-- Create a new folder in `src/core/components/dashboard` with the required feature name (example: `src/core/components/dashboard/new-feature`).
+- Create a new folder in `src/core/components/${page}` with the required feature name (example: `src/core/components/${page}/${feature}`).
 - Then follow the steps in the first condition.
 
 ## Repositories
@@ -84,14 +84,14 @@ If the required query belongs to any of the already created repositories (see: `
 
 If the required query does not belong to any of the already created repositories.
 
-- Create a new repository in `src/core/repositories` with the required query (example: `src/core/repositories/new-repository.ts`).
+- Create a new repository in `src/core/repositories` with the required query (example: `src/core/repositories/${new-repository}.ts`).
 - Then follow the steps in the first condition.
 
 ### How to consume the Repositories methods
 
 - Inside the component where you want to consume the repository method create a new function with a try-catch block and use the `call` function from `src/core/config/call.ts`.
 - You can handle loading and error states with the `useState` hook.
-- ⚠️ If you have too many requests and need some caching you can use the `useQuery` hook from [TanStack Query](https://tanstack.com/query/latest/).
+- ⚠️ If you have too many requests and need some caching or a core complex features use the `useQuery` hook from [TanStack Query](https://tanstack.com/query/latest/).
 
 ## Errors
 
