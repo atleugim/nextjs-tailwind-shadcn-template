@@ -6,54 +6,48 @@ const useQueryParams = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
 
+  const currentSearchParams = useMemo(() => {
+    return new URLSearchParams(Array.from(searchParams.entries()));
+  }, [searchParams]);
+
   const params = useMemo(() => {
-    const current = new URLSearchParams(Array.from(searchParams.entries()));
+    const currentParams: Record<string, string> = {};
 
-    const currentParams: Map<string, string> = new Map();
-
-    current.forEach((value, key) => {
-      currentParams.set(key, value);
+    currentSearchParams.forEach((value, key) => {
+      currentParams[key] = value;
     });
 
     return currentParams;
-  }, [searchParams]);
+  }, [currentSearchParams]);
 
   const addParam = (key: string, value: any) => {
-    const current = new URLSearchParams(Array.from(searchParams.entries()));
-
-    current.set(key, value.toString());
-    router.push(`${pathname}?${current.toString()}`);
+    currentSearchParams.set(key, value.toString());
+    router.push(`${pathname}?${currentSearchParams.toString()}`);
   };
 
-  const addParams = (params: Map<string, string>) => {
-    const current = new URLSearchParams(Array.from(searchParams.entries()));
-
-    params.forEach((value, key) => {
-      current.set(key, value);
+  const addParams = (newParams: Record<string, string>) => {
+    Object.entries(newParams).forEach(([key, value]) => {
+      currentSearchParams.set(key, value);
     });
 
-    router.push(`${pathname}?${current.toString()}`);
+    router.push(`${pathname}?${currentSearchParams.toString()}`);
   };
 
   const removeParam = (key: string) => {
-    const current = new URLSearchParams(Array.from(searchParams.entries()));
-
-    if (current.has(key)) {
-      current.delete(key);
-      router.push(`${pathname}?${current.toString()}`);
+    if (currentSearchParams.has(key)) {
+      currentSearchParams.delete(key);
+      router.push(`${pathname}?${currentSearchParams.toString()}`);
     }
   };
 
   const removeParams = (keys: string[]) => {
-    const current = new URLSearchParams(Array.from(searchParams.entries()));
-
     keys.forEach((key) => {
-      if (current.has(key)) {
-        current.delete(key);
+      if (currentSearchParams.has(key)) {
+        currentSearchParams.delete(key);
       }
     });
 
-    router.push(`${pathname}?${current.toString()}`);
+    router.push(`${pathname}?${currentSearchParams.toString()}`);
   };
 
   const removeAllParams = () => {
