@@ -61,7 +61,7 @@ This folder is very important, it contains all the components from the [shadcn-u
 
 ### How to create new components
 
-If the component is common through the app  (see: `src/core/components/common`).
+If the component is common through the app (see: `src/core/components/common`).
 
 If the component belongs to any of the already created folders components (see: `src/core/components/${folder-name}`).
 
@@ -104,7 +104,7 @@ By default the repositories do not control the errors thrown, you must contain t
   - Inside the file we will use a Record:
   ```ts
   export const errorsMap: Record<string, string> = {
-    'Error, email is used by other user': 'El correo electrónico ya está en uso',
+    'Error, email is used by other user': 'El correo electrónico ya está en uso'
   };
   ```
   - The record key is the api error in English and the value is the error in Spanish to show to the user.
