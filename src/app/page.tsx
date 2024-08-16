@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import ExampleComponent from '~/core/components/common/example-component';
 
 const HomePage = () => {
@@ -9,7 +11,10 @@ const HomePage = () => {
           Esta es una plantilla para Next.js con TypeScript, Tailwind CSS,
           Prettier, Husky y ESLint configurados.
         </p>
-        <ExampleComponent />
+        {/* WHY SUSPENSE?: https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout */}
+        <Suspense fallback={null}>
+          <ExampleComponent />
+        </Suspense>
       </div>
     </main>
   );

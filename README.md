@@ -46,11 +46,13 @@ This project can be deployed on [Vercel](https://vercel.com/).
 │   │   ├── components
 │   │   |   ├── common
 │   │   |   ├── ui
-│   │   ├── hooks
 │   │   ├── config
+│   │   |   ├── request
+│   │   ├── hooks
 │   │   ├── providers
 │   │   ├── repositories
 │   │   ├── styles
+│   │   ├── types
 ```
 
 ## Components
@@ -80,7 +82,7 @@ If the component does not belong to any of the already created folders component
 If the required query belongs to any of the already created repositories (see: `src/core/repositories`).
 
 - Create a new method in the repository with the required query.
-- Note that you must type the request parameters and the response data (see: `src/core/config/interfaces.ts`) for types or create a new one there (please don't be redundant).
+- Note that you must type the request parameters and the response data (see: `src/core/types`) for types or create a new one there (please don't be redundant).
 
 If the required query does not belong to any of the already created repositories.
 
@@ -89,7 +91,8 @@ If the required query does not belong to any of the already created repositories
 
 ### How to consume the Repositories methods
 
-- Inside the component where you want to consume the repository method create a new function with a try-catch block and use the `call` function from `src/core/config/call.ts`.
+- Inside the component where you want to consume the repository method create a new function with a try-catch block and use the `request` function from `src/core/config/request`, which also has the capability of parsing the response data to the passed type with the `ky` library.
+
 - You can handle loading and error states with the `useState` hook.
 - ⚠️ If you have too many requests and need some caching or a core complex features use the `useQuery` hook from [TanStack Query](https://tanstack.com/query/latest/).
 
