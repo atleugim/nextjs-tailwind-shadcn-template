@@ -11,7 +11,7 @@ export const formatDate = (date: string): string | undefined => {
   return format(new Date(date), 'dd MMM yyyy - hh:mm:ss a');
 };
 
-const isValidString = (str: string): boolean => {
+export const isValidString = (str: string): boolean => {
   if (
     str === null ||
     str === undefined ||

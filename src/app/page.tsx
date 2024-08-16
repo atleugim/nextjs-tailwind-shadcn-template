@@ -1,4 +1,4 @@
-import ExampleButton from '~/core/components/common/example-button';
+import ExampleComponent from '~/core/components/common/example-component';
 
 const HomePage = () => {
   return (
@@ -9,7 +9,7 @@ const HomePage = () => {
           Esta es una plantilla para Next.js con TypeScript, Tailwind CSS,
           Prettier, Husky y ESLint configurados.
         </p>
-        <ExampleButton />
+        <ExampleComponent />
       </div>
     </main>
   );
