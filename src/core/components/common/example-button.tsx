@@ -1,6 +1,7 @@
 'use client';
 
 import { toast } from 'sonner';
+
 import { Button } from '../ui/button';
 
 const ExampleButton = () => {

@@ -1,6 +1,16 @@
 {
-  "extends": ["next/core-web-vitals", "prettier"],
+  "extends": [
+    "next/core-web-vitals",
+    "prettier",
+    "plugin:react-hooks/recommended",
+    "plugin:tailwindcss/recommended"
+  ],
+  "plugins": ["tailwindcss"],
   "rules": {
-    "@next/next/no-img-element": "off"
-  }
+    "@next/next/no-img-element": "off",
+    "tailwindcss/classnames-order": "error",
+    "tailwindcss/no-custom-classname": "off",
+    "no-console": ["error"]
+  },
+  "ignorePatterns": ["node_modules/", ".next/", "public/"]
 }

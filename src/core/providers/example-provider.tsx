@@ -1,9 +1,9 @@
 'use client';
 
+import TailwindIndicator from '~/components/common/tailwind-indicator';
 import { setDefaultOptions } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { Toaster } from 'sonner';
-import TailwindIndicator from '~/components/common/tailwind-indicator';
 
 setDefaultOptions({
   locale: es

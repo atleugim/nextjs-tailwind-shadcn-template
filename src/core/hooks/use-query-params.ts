@@ -1,5 +1,5 @@
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const useQueryParams = () => {
   const router = useRouter();
