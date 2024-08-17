@@ -12,7 +12,7 @@ const HomePage = () => {
           Prettier, Husky y ESLint configurados.
         </p>
         {/* WHY SUSPENSE?: https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout */}
-        <Suspense fallback={null}>
+        <Suspense>
           <ExampleComponent />
         </Suspense>
       </div>

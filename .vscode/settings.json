@@ -6,5 +6,5 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit"
   },
-  "cSpell.words": ["esnext", "nuqs", "shadcn"]
+  "cSpell.words": ["esnext", "jiti", "nextjs", "nuqs", "shadcn"]
 }

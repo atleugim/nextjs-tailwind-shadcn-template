@@ -1,6 +1,5 @@
 import ky from 'ky';
-
-import { API_URL } from '~/core/config/constants';
+import { env } from 'src/env';
 
 import { getParams } from './params';
 import { RequestProps } from './types';
@@ -26,7 +25,7 @@ const _instance = ky.create({
 export const request = async <T>({
   path,
   method = 'GET',
-  baseUrl = API_URL,
+  baseUrl = env.NEXT_PUBLIC_API_URL,
   data,
   headers,
   params
