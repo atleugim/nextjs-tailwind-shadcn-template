@@ -5,6 +5,7 @@ import { setDefaultOptions } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { Toaster } from 'sonner';
 
+import GithubStarButton from '../components/common/github-star';
 import TailwindIndicator from '../components/common/tailwind-indicator';
 
 setDefaultOptions({
@@ -16,6 +17,7 @@ const queryClient = new QueryClient();
 const ExampleProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
+      <GithubStarButton />
       <TailwindIndicator />
       <Toaster position='top-center' richColors />
       {children}
