@@ -8,6 +8,12 @@ class UsersRepository {
       path: 'users'
     });
 
+    const randomNum = Math.floor(Math.random() * 10);
+
+    if (randomNum % 2 === 0) {
+      throw new Error('Error aleatorio para probar');
+    }
+
     if (res) {
       return res;
     }

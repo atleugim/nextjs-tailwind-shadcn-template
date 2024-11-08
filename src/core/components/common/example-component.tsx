@@ -1,5 +1,6 @@
 'use client';
 
+import { useId } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
@@ -8,41 +9,57 @@ import UsersRepository from '~/core/repositories/users-repository';
 import useSearch from '~/core/hooks/use-search';
 
 import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 
 const ExampleComponent = () => {
+  const toastId = useId();
   const [search, setSearch] = useSearch();
 
-  const { data, isLoading, refetch } = useQuery<User[]>({
+  const { data, isLoading, error, refetch } = useQuery<User[]>({
     queryKey: ['users'],
     queryFn: () => UsersRepository.getUsers(),
-    enabled: false
+    retry: false
   });
 
-  const onClick = () => {
-    toast.message('¡Hola! 👋', {
-      description:
-        'Esta es una plantilla para Next.js con TypeScript, Tailwind CSS, Prettier, Husky y ESLint configurados. Mira la URL 😉',
-      duration: 5000,
-      id: 'greeting'
-    });
-
-    refetch();
-
-    if (search) {
-      setSearch(null);
-      return;
-    }
-
-    setSearch('@atleugim');
+  const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
   };
 
   return (
     <div className='flex flex-col items-center justify-center gap-4'>
-      <Button onClick={onClick} loading={isLoading}>
-        Obtener usuarios
-      </Button>
+      <Input
+        type='text'
+        value={search ?? ''}
+        onChange={onSearch}
+        placeholder='Buscar usuarios'
+        className='max-w-sm'
+        onClick={() => {
+          toast.message('Mira la URL 😉', {
+            description:
+              'Cada vez que escribas algo en el input, la URL cambiará',
+            id: toastId
+          });
+        }}
+        disabled={isLoading || !data || error != null}
+      />
 
-      <ul>{data?.map((user) => <li key={user.id}>{user.name}</li>)}</ul>
+      {isLoading && <div>Cargando...</div>}
+
+      <ul>
+        {data
+          ?.filter((user) =>
+            user.name.toLowerCase().includes(search?.toLowerCase())
+          )
+          .map((user) => <li key={user.id}>{user.name}</li>)}
+      </ul>
+      {error && (
+        <>
+          <div className='text-red-500'>{error.message}</div>
+          <Button onClick={() => refetch()} disabled={isLoading}>
+            Reintentar
+          </Button>
+        </>
+      )}
     </div>
   );
 };
